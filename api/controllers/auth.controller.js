@@ -1,11 +1,13 @@
 import User from "../models/user.model.js";
 import bcryptjs from 'bcryptjs';
+import { errorHandler } from "../utils/error.js";
 
-export const signup = async (req, res) =>{
+export const signup = async (req, res, next) =>{
     const { username, email, password} =req.body;
     
     if( !username || !email || !password || username ==='' || email === '' || password === ''){
-        return res.status(400).json({messge: 'All fields are required for signup'});
+        // return res.status(400).json({messge: 'All fields are required for signup'});
+        next(errorHandler(400, 'All fields are required for signup'));
     }
 
     const hashedPassword = bcryptjs.hashSync(password,15);
@@ -21,7 +23,8 @@ export const signup = async (req, res) =>{
         res.json('Signup Succesful');
     }
     catch(error){
-        res.status(500).json({message: error.message});
+        // res.status(500).json({message: error.message});
+        next(error);
     }
 
 }
