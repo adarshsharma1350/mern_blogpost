@@ -55,7 +55,8 @@ export default function SignIn() {
           </Link>
 
           <p className="text-sm mt-5">
-            Sign in with your gmail and password or with other.
+            login with username and password or google otherwise you can login
+            with other method.
           </p>
         </div>
         {/* right */}
